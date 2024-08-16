@@ -11,6 +11,11 @@ function handleKeyboardButtonPress(event) {
   const playerPressed = event.key;
   console.log("player pressed", playerPressed);
 
+  // // to stop the gameOver, please press Escape
+  if (playerPressed === "Escape") {
+    gameOver();
+  }
+
   // get the expected to press
   const currentAlphabet = document.getElementById("current-alphabet");
   const targetedAlphabet = currentAlphabet.innerText;
@@ -97,4 +102,13 @@ function playStartNow() {
 function gameOver() {
   hideElementById("play-ground");
   showElementById("final-score");
+
+  //update final score the the score box
+  const gameScore = getTextElementById("current-score");
+  setTextElementById("game-score", gameScore);
+
+  // clear the last selected alphabet with the highlight
+
+  const currentAlphabet = getElementTextById("current-alphabet");
+  removeBackgroundById(currentAlphabet);
 }
