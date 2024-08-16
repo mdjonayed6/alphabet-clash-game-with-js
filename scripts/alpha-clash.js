@@ -16,6 +16,10 @@ function handleKeyboardButtonPress(event) {
     gameOver();
   }
 
+  if (playerPressed === "Enter") {
+    playStartNow();
+  }
+
   // get the expected to press
   const currentAlphabet = document.getElementById("current-alphabet");
   const targetedAlphabet = currentAlphabet.innerText;
