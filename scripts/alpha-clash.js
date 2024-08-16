@@ -20,29 +20,51 @@ function handleKeyboardButtonPress(event) {
   // check matched or not
   if (playerPressed === expectedAlphabet) {
     console.log("Wow, you get a point");
-    console.log("you have pressed correctly", expectedAlphabet);
+
+    const currentScore = getTextElementById("current-score");
+    const updatedScore = currentScore + 1;
+    setTextElementById("current-score", updatedScore);
+
+    //..............................
     //update Scores
     // 1. get the current score
-    const currentScoreElement = document.getElementById("current-score");
-    const currentScoreText = currentScoreElement.innerText;
-    const currentScore = parseInt(currentScoreText);
-    console.log(currentScore);
-    // 2. increase the score by 1
-    const newScore = currentScore + 1;
+    // const currentScoreElement = document.getElementById("current-score");
+    // const currentScoreText = currentScoreElement.innerText;
+    // const currentScore = parseInt(currentScoreText);
+    // console.log(currentScore);
+    // // 2. increase the score by 1
+    // const newScore = currentScore + 1;
 
-    // 3. Show the update score
-    currentScoreElement.innerText = newScore;
+    // // 3. Show the update score
+    // currentScoreElement.innerText = newScore;
 
     //Start a new round
+    //................................
+
     removeBackgroundById(expectedAlphabet);
     continueGame();
   } else {
     console.log("Ohh no, missed it. You lose a live");
-    // step 1: get the current life Number
-    
-    // step 2: reduce the life count
 
-    // step 3: display the life count 
+    const currentLife = getTextElementById("current-life");
+    const updatedLife = currentLife - 1;
+    setTextElementById("current-life", updatedLife);
+
+    if (updatedLife === 0) {
+      gameOver();
+    }
+
+    //.................................................
+    // step 1: get the current life Number
+    // const currentLifeElement = document.getElementById("current-life");
+    // const currentLifeText = currentLifeElement.innerText;
+    // const currentLife = parseInt(currentLifeText);
+    // console.log(currentLife);
+    // // step 2: reduce the life count
+    // const newLife = currentLife - 1;
+    // // step 3: display the life count
+    // currentLifeElement.innerText = newLife;
+    //................................................
   }
 }
 // keyboard press capture
@@ -63,6 +85,16 @@ function continueGame() {
 
 function playStartNow() {
   hideElementById("home-screen");
+  hideElementById("final-score");
   showElementById("play-ground");
+
+  // reset score and Life
+  setTextElementById("current-life", 5);
+  setTextElementById("current-score", 0);
   continueGame();
+}
+
+function gameOver() {
+  hideElementById("play-ground");
+  showElementById("final-score");
 }
